@@ -3,7 +3,7 @@ const io = require("socket.io")(8000, {
 });
 
 const users = {};
-const rooms = {}; // keep track of socket -> room mapping
+const rooms = {}; 
 
 io.on('connection', socket => {
     socket.on('join-room', ({ name, room }) => {
