@@ -11,11 +11,16 @@
     <nav>
         <img class="logo" src="https://img.freepik.com/premium-vector/chat-app-logo-design-template-can-be-used-icon-chat-application-logo_605910-1724.jpg" alt="Chat Logo">
     </nav>
+
     <div class="container"></div>
+
     <div class="send">
         <form action="#" id="send-container">
             <input type="text" name="messageInp" id="messageInp" autocomplete="off" placeholder="Type a message...">
             <button class="btn" type="submit">Send</button>
+            <!-- 📂 File Input (hidden) -->
+            <label for="fileInp" class="btn file-btn">📂</label>
+            <input type="file" id="fileInp" hidden />
         </form>
     </div>
 </body>

@@ -87,4 +87,48 @@
   .btn:hover {
     background-color: #145dbf;
   }
+
+  .send {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+#send-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#messageInp {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #4caf50;
+    color: white;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #45a049;
+}
+
+.file-btn {
+    background: #2196f3;
+}
+
+.file-btn:hover {
+    background: #1976d2;
+}
+
   
