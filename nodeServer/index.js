@@ -1,11 +1,27 @@
-const io = require("socket.io")(8000, {
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const path = require('path');
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
     cors: { origin: "*" }
 });
 
 const users = {};
-const rooms = {}; 
+const rooms = {};
 
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+// Socket.IO logic
 io.on('connection', socket => {
+    console.log('A user connected:', socket.id);
+
     socket.on('join-room', ({ name, room }) => {
         users[socket.id] = name;
         rooms[socket.id] = room;
@@ -13,15 +29,12 @@ io.on('connection', socket => {
         socket.join(room);
         socket.to(room).emit('user-joined', name);
 
-        // Handle text messages
+        // Text messages
         socket.on('send-message', ({ message }) => {
-            io.to(room).emit('receive', {
-                name: users[socket.id],
-                message: message
-            });
+            io.to(room).emit('receive', { name: users[socket.id], message });
         });
 
-        // Handle file sending
+        // File sharing
         socket.on('send-file', (data) => {
             io.to(room).emit('receive-file', {
                 name: users[socket.id],
@@ -31,7 +44,7 @@ io.on('connection', socket => {
             });
         });
 
-        // Handle disconnect
+        // Disconnect
         socket.on('disconnect', () => {
             socket.to(room).emit('user-left', users[socket.id]);
             delete users[socket.id];
@@ -39,3 +52,6 @@ io.on('connection', socket => {
         });
     });
 });
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

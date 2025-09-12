@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>iChat Rooms</title>
-    <script defer src="http://localhost:8000/socket.io/socket.io.js"></script>
-    <script defer src="js/client.js"></script>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="js/script.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,7 +18,6 @@
         <form action="#" id="send-container">
             <input type="text" name="messageInp" id="messageInp" autocomplete="off" placeholder="Type a message...">
             <button class="btn" type="submit">Send</button>
-            
             <label for="fileInp" class="btn file-btn">📂</label>
             <input type="file" id="fileInp" hidden />
         </form>
